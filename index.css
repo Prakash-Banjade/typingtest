@@ -92,3 +92,45 @@ span.currSpan::after{
         opacity: 1;
     }
 }
+
+.score{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.score p{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.score p span{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+.score p.wpm-text{
+    color: green;
+}
+
+.score p span{
+    color: grey;
+}
+
+.score p.acc-text{
+    color: #141578;
+}
+
+button#reset{
+    padding: 10px;
+    font-size: 1rem;
+    background-color: dodgerblue;
+    color: white;
+    border: 1px solid rgb(25, 119, 213);
+    border-radius: 3px;
+    cursor: pointer;
+    flex: 1 1 100%;
+}
