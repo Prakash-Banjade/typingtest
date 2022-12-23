@@ -3,6 +3,7 @@ let ranTextSpan;
 async function getRanQuote() {
   let response = await fetch("http://quotable.io/random?minLength=300");
   let data = await response.json();
+  response.catch(err => console.log(err))
   random_text = data.content;
 
   let textArray = random_text.split("");
