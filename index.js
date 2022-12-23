@@ -36,7 +36,7 @@ text_box.addEventListener("input", checkText);
 
 function addEventForTimer() {
   text_box.addEventListener(
-    "keypress",
+    "input",
     () => {
       startTime = new Date();
     },
@@ -93,7 +93,9 @@ function checkText(e) {
   if (curr_text.length == ranTextSpan.length) {
     endTime = new Date();
 
-    timeTaken = (endTime - startTime) / 1000 / 60;
+    console.log("Time difference", endTime - startTime)
+    console.log('End time: ', endTime, '\nStart time: ', startTime);
+    timeTaken = Number(endTime - startTime) / 1000 / 60;
     let acc = Math.floor((rightCount / totalKeysPressed) * 100);
     let wpm = Math.floor((acc / 100) * (totalKeysPressed / 5 / timeTaken));
 
@@ -102,12 +104,14 @@ function checkText(e) {
 }
 
 function setScore(wpm, acc) {
+  // console.log(wpm);
   document.getElementById(
     "wpm"
   ).innerHTML = `${wpm} WPM <br> <span>Words Per Minute</span>`;
   document.getElementById(
     "acc"
   ).innerHTML = `${acc}% <br> <span>Accuracy</span>`;
+
 }
 
 let resetBtn = document.getElementById("reset");
