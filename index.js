@@ -1,7 +1,7 @@
 let random_text;
 let ranTextSpan;
 async function getRanQuote() {
-  let response = await fetch("http://quotable.io/random?maxLength=300");
+  let response = await fetch("http://quotable.io/random?minLength=300");
   let data = await response.json();
   random_text = data.content;
 
@@ -92,9 +92,6 @@ function checkText(e) {
 
   if (curr_text.length == ranTextSpan.length) {
     endTime = new Date();
-
-    console.log("Time difference", endTime - startTime)
-    console.log('End time: ', endTime, '\nStart time: ', startTime);
     timeTaken = Number(endTime - startTime) / 1000 / 60;
     let acc = Math.floor((rightCount / totalKeysPressed) * 100);
     let wpm = Math.floor((acc / 100) * (totalKeysPressed / 5 / timeTaken));
