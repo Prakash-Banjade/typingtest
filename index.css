@@ -36,14 +36,14 @@ body{
     gap: 3rem;
     max-width: 1200px;
     /* margin: auto; */
-    padding: 30px;
+    /* padding: 30px; */
 }
 
 .typingSection > *{
     flex: 1 1 400px;
 }
 .wrapper{
-    max-width: 100ch;
+    max-width: 100%;
     margin: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
