@@ -1,19 +1,32 @@
-let random_text;
 let ranTextSpan;
-async function getRanQuote() {
-  let response = await fetch("http://quotable.io/random?minLength=300");
-  let data = await response.json();
-  response.catch(err => console.log(err))
-  random_text = data.content;
+let random_text;
 
-  let textArray = random_text.split("");
+let random_text_array = [
+  "An ever-growing number of complex and rigid rules plus hard-to-cope-with regulations are now being legislated from state to state. Key federal regulations were formulated by the FDA, FTC, and the CPSC. Each of these federal agencies serves a specific mission.",
+  " One example: Laws sponsored by the Office of the Fair Debt Collection Practices prevent an agency from purposefully harassing clients in serious debt. The Fair Packaging and Labeling Act makes certain that protection from misleading packaging of goods is guaranteed to each buyer of goods carried in small shops as well as in large supermarkets.",
+  `Products on the market must reveal the names of all ingredients on the label. Language must be in clear and precise terms that can be understood by everyone. This practice is very crucial for the lives of many people. It is prudent that we recall that the FDA specifically requires that all goods are pure, safe, and wholesome. The FDA states that all goods be produced under highly sanitary conditions.`,
+  `Drugs must be completely safe and must also be effective for their stated purpose. This policy applies to cosmetics that must be both safe and pure. Individuals are often totally unappreciative of the FDA's great dedication.`,
+];
+async function getRanQuote() {
+  let text = document.getElementById("text");
+  text.innerText = "Loading...";
+  // let response = await fetch("http://quotable.io/random?minLength=300");
+  // let data = await response.json();
+  // random_text = data.content;
+  await fetch("http://quotable.io/random?minLength=300")
+    .then((response) => response.json())
+    .then((data) => {random_text = data.content})
+    .catch(() => {
+      random_text = random_text_array[Math.floor(Math.random() * 4)]
+    });
+
+  let textArray = random_text.split('');
   let textHTML = "";
 
   textArray.forEach((letter) => {
     textHTML += `<span class="letter">${letter}</span>`;
   });
 
-  let text = document.getElementById("text");
   text.innerHTML = textHTML;
 
   ranTextSpan = Array.from(document.querySelectorAll(".letter"));
@@ -103,13 +116,10 @@ function checkText(e) {
 
 function setScore(wpm, acc) {
   // console.log(wpm);
-  document.getElementById(
-    "wpm"
-  ).innerHTML = `${wpm} WPM <br> <span>Words Per Minute</span>`;
-  document.getElementById(
-    "acc"
-  ).innerHTML = `${acc}% <br> <span>Accuracy</span>`;
-
+  document.getElementById("wpm").innerHTML =
+    wpm == "" ? null : `${wpm} WPM <br> <span>Words Per Minute</span>`;
+  document.getElementById("acc").innerHTML =
+    acc == "" ? null : `${acc}% <br> <span>Accuracy</span>`;
 }
 
 let resetBtn = document.getElementById("reset");
@@ -125,6 +135,6 @@ function reset() {
   rightCount = 0;
   totalKeysPressed = 0;
 
-  setScore(0, 0);
+  setScore("", "");
   addEventForTimer();
 }
